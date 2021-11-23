@@ -28,13 +28,14 @@ docker run --rm -v $PWD:/app composer create-project laravel/laravel example-mei
 +MEILISEARCH_HOST=http://meilisearch:7700
 +MEILISEARCH_KEY=masterKey
 ```
-3.日本語のダミーデータを作成するために、config/app.phpのfaker_localeの値をja_JPに変更します。
+
+3. 日本語のダミーデータを作成するために、config/app.phpのfaker_localeの値をja_JPに変更します。
 ```
 -'faker_locale' => 'en_US',
 +'faker_locale' => 'ja_JP',
 ```
 
-3. このリポジトリ内のファイルとディレクトリをすべて、gitコマンド（fetchとmerge）か手動で、Laravelプロジェクトディレクトリにコピーします。
+4. このリポジトリ内のファイルとディレクトリをすべて、gitコマンド（fetchとmerge）か手動で、Laravelプロジェクトディレクトリにコピーします。
 ```
 git init
 git add .
@@ -43,11 +44,11 @@ git remote add origin git@github.com:Asano-Naoki/docker_laravel_meilisearch.git
 git fetch
 git merge origin/main --allow-unrelated-histories
 ```
-4. docker-composeを開始します。
+5. docker-composeを開始します。
 ```
 docker-compose up -d
 ```
-5. usersテーブルを作ります。
+6. usersテーブルを作ります。
 ```
 docker-compose exec php sh
 ...
@@ -57,11 +58,11 @@ php artisan migrate
 ```
 注: 最初のセットアップ時には、mysqlファイルがすべて作られていないために、php artisan migrateコマンドが失敗するかもしれません。その場合は数分待ってください。
 
-6. Laravel Scoutとthe MeiliSearch PHP SDKをインストールします。
+7. Laravel Scoutとthe MeiliSearch PHP SDKをインストールします。
 ```
 docker run --rm -v $PWD:/app composer require laravel/scout meilisearch/meilisearch-php http-interop/http-factory-guzzle
 ```
-7. コンフィグファイルを発行します。
+8. コンフィグファイルを発行します。
 ```
 docker-compose exec php sh
 ...
@@ -69,7 +70,7 @@ docker-compose exec php sh
 ...
 php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
 ```
-8. Laravel\Scout\Searchableトレイトをuserモデル(app/Models/User.php)につけ加えます。 
+9. Laravel\Scout\Searchableトレイトをuserモデル(app/Models/User.php)につけ加えます。 
 ```
 (at the top level)
 +use Laravel\Scout\Searchable;
@@ -79,7 +80,7 @@ php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
 +use HasApiTokens, HasFactory, Notifiable, Searchable;
 ```
 
-9. テストユーザーレコードを作成します。
+10. テストユーザーレコードを作成します。
 
     (1) database/seeders/DatabaseSeeder.phpを設定します。
     ```
