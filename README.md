@@ -65,9 +65,8 @@ docker-compose exec php sh
 ...
 php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
 ```
-8. Add the Laravel\Scout\Searchable trait to the user model. 
-
-```app/Models/User.php
+8. Add the Laravel\Scout\Searchable trait to the user model(app/Models/User.php). 
+```
 (at the top level)
 +use Laravel\Scout\Searchable;
 
@@ -93,6 +92,9 @@ php artisan vendor:publish --provider="Laravel\Scout\ScoutServiceProvider"
     php artisan db:seed
     ```
     NOTE:
+    You can create users manually. See https://github.com/Asano-Naoki/docker_laravel_mailhog Prerequisites 6 through 9.
+    
+    NOTE:
     The model data with searchable trait become automatically searchable as soon as they are created. When you need to make existing data(the data created without searchable trait) searchable, you can do batch import.
     ```
     php artisan scout:import "App\Models\User"
@@ -107,7 +109,7 @@ Create searchable model data(or do batch import) and you can search them at http
 
 You can also use meilisearch in your Laravel application. Read the official documentation for details.
 
-I'll show you very simple example to search users.
+Here I'll show you a very simple example to search users.
 
 Append this code snippet to routes/web.php.
 
@@ -134,10 +136,10 @@ Route::get('user_search', function(){
     }
 });
 ```
-You can search users at http://localhost:7700/user_search.
+You can search users at http://localhost/user_search.
 
 CAUTION:
-This code is for only temporary testing purpose. You should use controllers, views, validations. Especially, don't use form data without escaping them.
+This code snippet is for only temporary testing purpose. You should use controllers, views, validations, etc. Especially, don't use form data which other people input without escaping them.
 
 
 ## Author

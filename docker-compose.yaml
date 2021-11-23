@@ -41,7 +41,6 @@ services:
     user: 'root'
     ports:
       - '7700:7700'
-    user: '1000:1000'
     volumes:
       - './docker/meilisearch/volume:/home/meili/data.ms'
     environment:
