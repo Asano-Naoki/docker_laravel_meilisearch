@@ -38,7 +38,6 @@ services:
 
   meilisearch:
     image: 'getmeili/meilisearch'
-    user: 'root'
     ports:
       - '7700:7700'
     volumes:
